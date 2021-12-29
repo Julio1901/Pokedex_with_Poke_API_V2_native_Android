@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
             parametersOf(MainRepository(view.context))
         }
 
+        mainViewModel.getPokemonById(35)
 
 
     }
