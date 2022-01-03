@@ -34,6 +34,8 @@ class HomeFragment : Fragment() {
 
         mainViewModel.getPokemonById(35)
 
+        mainViewModel.getPokemonListResponse()
+
 
     }
 
