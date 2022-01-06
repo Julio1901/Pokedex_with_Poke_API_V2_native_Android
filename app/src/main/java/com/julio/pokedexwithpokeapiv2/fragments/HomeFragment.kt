@@ -51,6 +51,9 @@ class HomeFragment : Fragment() {
             Log.d("First pokemon" , name)
 
 
+            val pokemon = pokeTest
+            
+
             recyclerViewHomePokemon.adapter = PokemonAdapter(view.context, it.results)
 
 
