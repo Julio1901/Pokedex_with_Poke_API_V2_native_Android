@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.Pokemon
+import com.julio.pokedexwithpokeapiv2.utils.Formatter
 
 class PokemonAdapter (private val context : Context, private val pokemonList : List<Pokemon>) : RecyclerView.Adapter<PokemonAdapter.MyViewHolder>() {
 
@@ -35,10 +36,10 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
 
         val pokemon = pokemonList[position]
 
-        //Get the id of the pokemon from its URL
-        val urlSize = pokemon.url.length
-        val pokemonId = pokemon.url.subSequence((urlSize-2), (urlSize - 1))
-        val imagemUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/00$pokemonId.png"
+        val formatterInstance = Formatter()
+        val formattedId = formatterInstance.getThePokemonIdFromItsUrl(pokemon)
+
+        val imagemUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedId.png"
 
         holder.nameTextView.text = pokemon.name
         Glide.with(holder.viewToGlide).load(imagemUrl).into(holder.imagePokemon)

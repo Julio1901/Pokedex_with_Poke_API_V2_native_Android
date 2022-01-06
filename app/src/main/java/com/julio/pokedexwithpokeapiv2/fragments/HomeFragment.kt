@@ -52,7 +52,15 @@ class HomeFragment : Fragment() {
 
 
             val pokemon = pokeTest
-            
+
+
+            var pokemonId = pokemon.url.dropLastWhile { it.digitToIntOrNull() == null}
+            pokemonId = pokemonId.dropWhile { it.digitToIntOrNull() == null}
+            val list = pokemonId.split("pokemon")
+            pokemonId = list[1].replace("/", "")
+
+            Log.d("pokemon ID", pokemonId)
+
 
             recyclerViewHomePokemon.adapter = PokemonAdapter(view.context, it.results)
 
