@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
+import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -34,6 +36,9 @@ class HomeFragment : Fragment() {
             parametersOf(MainRepository(view.context))
         }
 
+        val recyclerViewHomePokemon = view.findViewById<RecyclerView>(R.id.recycler_view_home_pokemon)
+
+
         mainViewModel.getPokemonById(35)
 
         mainViewModel.getPokemonList()
@@ -44,6 +49,10 @@ class HomeFragment : Fragment() {
 
             val name = pokeTest.name
             Log.d("First pokemon" , name)
+
+
+            recyclerViewHomePokemon.adapter = PokemonAdapter(view.context, it.results)
+
 
 
         })

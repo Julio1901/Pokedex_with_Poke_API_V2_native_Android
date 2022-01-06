@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment" >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="323dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="389dp"
-        android:text="Hello World"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_home_pokemon"
+        android:layout_width="416dp"
+        android:layout_height="447dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.286" />
 </androidx.constraintlayout.widget.ConstraintLayout>
