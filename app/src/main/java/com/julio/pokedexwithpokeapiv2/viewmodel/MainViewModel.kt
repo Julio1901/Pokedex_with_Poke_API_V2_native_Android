@@ -4,14 +4,26 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.julio.pokedexwithpokeapiv2.api.model.PokemonsApiResult
+import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import kotlinx.coroutines.launch
-import retrofit2.Call
 
 class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
-    val pokemonListResponse = MutableLiveData<Call<PokemonsApiResult>>()
+    var pokemonListResponse = MutableLiveData<PokemonListResult?>()
+
+
+    fun getPokemonList() {
+        viewModelScope.launch {
+
+            val response = mainRepository.getPokemonList()
+            Log.e("Pokemon list", "List")
+
+            pokemonListResponse.value = response
+
+        }
+
+    }
 
 
     fun getPokemonById(id : Int){
@@ -21,9 +33,7 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
         }
     }
 
-    fun getPokemonListResponse(){
-            pokemonListResponse.value = mainRepository.getPokemonApiResultList()
 
-    }
+
 
 }
