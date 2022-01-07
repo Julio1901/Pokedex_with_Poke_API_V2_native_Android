@@ -1,17 +1,37 @@
 package com.julio.pokedexwithpokeapiv2.viewmodel
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
+import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
+import com.julio.pokedexwithpokeapiv2.fragments.PokemonDisplayCardFragment
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
+import com.julio.pokedexwithpokeapiv2.utils.Formatter
+import com.julio.pokedexwithpokeapiv2.utils.ImageDaoService
 import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
     var pokemonListResponse = MutableLiveData<PokemonListResult?>()
+    var pokemonImageLiveData = MutableLiveData<Bitmap>()
 
+
+
+    // Api Client functions
 
     fun getPokemonList() {
         viewModelScope.launch {
@@ -32,6 +52,66 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             Log.e("pokemon", pokemon.base_experience.toString())
         }
     }
+
+
+    // Local Data-Base functions
+
+    fun insertPokemonIntoDb(pokemon : PokemonDaoEntity){
+
+        viewModelScope.launch {
+            try {
+                mainRepository.insertPokemonIntoDb(pokemon)
+            }catch ( e: Exception){
+                    Log.d("Error inserting Pokemon", e.toString())
+             }
+        }
+
+    }
+
+
+    fun updateLocalDb(pokemonListResult: PokemonListResult ){
+
+
+
+        val pokemonList = pokemonListResult.results
+
+        var pokemonFormatedToDb : PokemonDaoEntity
+
+        val formatterInstance = Formatter()
+
+
+        val imageDaoService = ImageDaoService()
+
+
+        pokemonList.forEach {
+
+            val pokemonId = formatterInstance.getThePokemonIdFromItsUrl(it).toInt()
+
+            val imagemUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$pokemonId.png"
+
+
+            val mockByteArray = byteArrayOf(1)
+
+            //val dbEncodedImage = imageDaoService.saveImageInBank(imageByteMap)
+
+
+            pokemonFormatedToDb = PokemonDaoEntity(
+                0,
+                it.name,
+                it.url,
+                pokemonId,
+                mockByteArray
+            )
+
+            insertPokemonIntoDb(pokemonFormatedToDb)
+
+
+        }
+
+
+    }
+
+
 
 
 

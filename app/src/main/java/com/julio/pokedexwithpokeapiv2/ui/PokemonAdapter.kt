@@ -1,6 +1,7 @@
 package com.julio.pokedexwithpokeapiv2.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +12,18 @@ import com.bumptech.glide.Glide
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.Pokemon
 import com.julio.pokedexwithpokeapiv2.databinding.FragmentPokemonDisplayCardBinding
+import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.utils.Formatter
+import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
+import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PokemonAdapter (private val context : Context, private val pokemonList : List<Pokemon>) : RecyclerView.Adapter<PokemonAdapter.MyViewHolder>() {
 
-    class MyViewHolder(private val binding : FragmentPokemonDisplayCardBinding) : RecyclerView.ViewHolder(binding.root){
 
-//        val nameTextView : TextView = view.findViewById(R.id.text_view_pokemon_name)
-//        val imagePokemon : ImageView = view.findViewById(R.id.image_view_pokemon)
-//
-//        val viewToGlide = view
+
+    class MyViewHolder(private val binding : FragmentPokemonDisplayCardBinding) : RecyclerView.ViewHolder(binding.root){
 
 
           val nameTextView : TextView =  binding.textViewPokemonName
@@ -28,10 +31,13 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
 
           val viewToGlide = binding.root
 
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        //val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.fragment_pokemon_display_card, parent, false)
+
 
         val binding = FragmentPokemonDisplayCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
@@ -50,6 +56,11 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
 
         holder.nameTextView.text = pokemon.name
         Glide.with(holder.viewToGlide).load(imagemUrl).into(holder.imagePokemon)
+
+
+
+
+
 
     }
 

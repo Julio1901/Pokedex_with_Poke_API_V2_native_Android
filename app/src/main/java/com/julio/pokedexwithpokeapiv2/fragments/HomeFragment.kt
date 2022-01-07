@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.julio.pokedexwithpokeapiv2.R
+import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
 import com.julio.pokedexwithpokeapiv2.databinding.FragmentHomeBinding
+import com.julio.pokedexwithpokeapiv2.databinding.FragmentPokemonDisplayCardBinding
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
+import com.julio.pokedexwithpokeapiv2.utils.ImageDaoService
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
+import kotlinx.coroutines.NonDisposableHandle.parent
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -56,6 +60,25 @@ class HomeFragment : Fragment() {
 
         mainViewModel.pokemonListResponse.observe(this, Observer {
 
+
+
+            mainViewModel.updateLocalDb(it!!)
+
+            val byteArray : ByteArray = byteArrayOf(1)
+
+
+            val mockPokemon = PokemonDaoEntity(
+                0,
+                "mock",
+                "mock",
+                2,
+                byteArray
+
+            )
+
+            mainViewModel.insertPokemonIntoDb(mockPokemon)
+
+
             val pokeTest = it!!.results[0]
 
             val name = pokeTest.name
@@ -63,6 +86,7 @@ class HomeFragment : Fragment() {
 
 
             val pokemon = pokeTest
+
 
 
             var pokemonId = pokemon.url.dropLastWhile { it.digitToIntOrNull() == null}
@@ -77,7 +101,13 @@ class HomeFragment : Fragment() {
 
 
 
+
+
+
         })
+
+
+
 
 
 
