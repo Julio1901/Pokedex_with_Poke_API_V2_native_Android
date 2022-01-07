@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.julio.pokedexwithpokeapiv2.R
+import com.julio.pokedexwithpokeapiv2.databinding.FragmentHomeBinding
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
@@ -18,15 +19,25 @@ import org.koin.core.parameter.parametersOf
 
 class HomeFragment : Fragment() {
 
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        val view = binding.root
 
         return view
+
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

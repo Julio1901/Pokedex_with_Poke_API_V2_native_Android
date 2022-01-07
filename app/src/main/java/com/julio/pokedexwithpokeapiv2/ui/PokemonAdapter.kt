@@ -10,25 +10,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.Pokemon
+import com.julio.pokedexwithpokeapiv2.databinding.FragmentPokemonDisplayCardBinding
 import com.julio.pokedexwithpokeapiv2.utils.Formatter
 
 class PokemonAdapter (private val context : Context, private val pokemonList : List<Pokemon>) : RecyclerView.Adapter<PokemonAdapter.MyViewHolder>() {
 
-    class MyViewHolder(private val view : View) : RecyclerView.ViewHolder(view){
+    class MyViewHolder(private val binding : FragmentPokemonDisplayCardBinding) : RecyclerView.ViewHolder(binding.root){
 
-        val nameTextView : TextView = view.findViewById(R.id.text_view_pokemon_name)
-        val imagePokemon : ImageView = view.findViewById(R.id.image_view_pokemon)
+//        val nameTextView : TextView = view.findViewById(R.id.text_view_pokemon_name)
+//        val imagePokemon : ImageView = view.findViewById(R.id.image_view_pokemon)
+//
+//        val viewToGlide = view
 
-        val viewToGlide = view
 
+          val nameTextView : TextView =  binding.textViewPokemonName
+          val imagePokemon : ImageView = binding.imageViewPokemon
+
+          val viewToGlide = binding.root
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.fragment_pokemon_display_card,
-        parent, false)
+        //val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.fragment_pokemon_display_card, parent, false)
 
-        return MyViewHolder(adapterLayout)
+        val binding = FragmentPokemonDisplayCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
