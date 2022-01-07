@@ -1,5 +1,6 @@
 package com.julio.pokedexwithpokeapiv2.viewmodel
 
+import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
@@ -16,19 +17,28 @@ import com.bumptech.glide.request.transition.Transition
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
+import com.julio.pokedexwithpokeapiv2.di.AppApplication
 import com.julio.pokedexwithpokeapiv2.fragments.PokemonDisplayCardFragment
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.utils.Formatter
 import com.julio.pokedexwithpokeapiv2.utils.ImageDaoService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.io.BufferedInputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLConnection
+import kotlin.coroutines.coroutineContext
 
 class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
     var pokemonListResponse = MutableLiveData<PokemonListResult?>()
     var pokemonImageLiveData = MutableLiveData<Bitmap>()
+    var pokemonLocalListFlow = mutableListOf<PokemonDaoEntity>()
 
+
+    lateinit var  myQueryResponse : Flow<List<PokemonDaoEntity>>
 
 
     // Api Client functions
@@ -72,7 +82,6 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
     fun updateLocalDb(pokemonListResult: PokemonListResult ){
 
 
-
         val pokemonList = pokemonListResult.results
 
         var pokemonFormatedToDb : PokemonDaoEntity
@@ -90,24 +99,42 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             val imagemUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$pokemonId.png"
 
 
-            val mockByteArray = byteArrayOf(1)
 
-            //val dbEncodedImage = imageDaoService.saveImageInBank(imageByteMap)
-
+            // This is a mock byte array. Then will be refactored to an byteArray with contains image data
+            // ex: val byteArray = imageDaoService.saveImageInBank(myBitMapImage)
+            val byteArray : ByteArray = byteArrayOf(1)
 
             pokemonFormatedToDb = PokemonDaoEntity(
                 0,
                 it.name,
                 it.url,
                 pokemonId,
-                mockByteArray
+                byteArray
             )
 
             insertPokemonIntoDb(pokemonFormatedToDb)
 
-
         }
 
+
+    }
+
+
+
+    fun getListPokemonInLocalDb(){
+
+        viewModelScope.launch {
+
+            myQueryResponse = mainRepository.getAllPokemonsInDb()
+
+
+            myQueryResponse.collect {
+                it.forEach {
+                    pokemonLocalListFlow.add(it)
+                }
+            }
+
+        }
 
     }
 

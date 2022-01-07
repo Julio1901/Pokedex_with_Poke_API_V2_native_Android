@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
@@ -17,6 +18,8 @@ import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
 import com.julio.pokedexwithpokeapiv2.utils.ImageDaoService
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
 import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -62,7 +65,10 @@ class HomeFragment : Fragment() {
 
 
 
+
             mainViewModel.updateLocalDb(it!!)
+
+
 
             val byteArray : ByteArray = byteArrayOf(1)
 
@@ -76,7 +82,7 @@ class HomeFragment : Fragment() {
 
             )
 
-            mainViewModel.insertPokemonIntoDb(mockPokemon)
+            //mainViewModel.insertPokemonIntoDb(mockPokemon)
 
 
             val pokeTest = it!!.results[0]
@@ -109,6 +115,14 @@ class HomeFragment : Fragment() {
 
 
 
+
+
+
+        mainViewModel.pokemonImageLiveData.observe(this, Observer {
+
+            Log.d("pegou imagem", mainViewModel.pokemonImageLiveData.value.toString())
+
+        })
 
 
 

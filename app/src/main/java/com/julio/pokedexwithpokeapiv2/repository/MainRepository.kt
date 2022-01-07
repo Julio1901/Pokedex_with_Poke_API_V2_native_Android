@@ -6,7 +6,7 @@ import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDataBase
 import com.julio.pokedexwithpokeapiv2.model.PokemonEntity
-
+import kotlinx.coroutines.flow.Flow
 
 
 class MainRepository (context : Context) {
@@ -30,6 +30,10 @@ class MainRepository (context : Context) {
    suspend fun insertPokemonIntoDb(pokemon : PokemonDaoEntity){
        daoInstance.insertPokemonIntoDb(pokemon)
    }
+
+    fun getAllPokemonsInDb() : Flow<List<PokemonDaoEntity>>{
+        return daoInstance.getAllPokemonsInDb()
+    }
 
 
 
