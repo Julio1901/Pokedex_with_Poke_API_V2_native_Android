@@ -1,17 +1,12 @@
 package com.julio.pokedexwithpokeapiv2.utils
 
-import android.content.Context
+
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.lifecycle.LifecycleCoroutineScope
-
-import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
-import com.julio.pokedexwithpokeapiv2.dao.PokemonDataBase
-import kotlinx.coroutines.launch
-
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
+/*This class will be used to persist images locally in the database for future enhancements*/
 class ImageDaoService {
 
     //Receive image that will be sent as BitMap
@@ -32,6 +27,5 @@ class ImageDaoService {
 
         return imageBitmap
     }
-
 
 }

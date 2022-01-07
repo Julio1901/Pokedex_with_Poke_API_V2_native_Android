@@ -9,5 +9,32 @@
         android:id="@+id/homeFragment"
         android:name="com.julio.pokedexwithpokeapiv2.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_detail_fragment"
+            app:destination="@id/pokemonDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.julio.pokedexwithpokeapiv2.PokemonDetailFragment"
+        android:label="fragment_pokemon_detail"
+        tools:layout="@layout/fragment_pokemon_detail" >
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_details_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDisplayCardFragment"
+        android:name="com.julio.pokedexwithpokeapiv2.fragments.PokemonDisplayCardFragment"
+        android:label="fragment_pokemon_display_card"
+        tools:layout="@layout/fragment_pokemon_display_card" />
 </navigation>

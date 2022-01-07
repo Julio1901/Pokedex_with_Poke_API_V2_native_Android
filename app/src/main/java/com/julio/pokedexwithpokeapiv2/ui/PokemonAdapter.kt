@@ -5,17 +5,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.api.model.Pokemon
 import com.julio.pokedexwithpokeapiv2.databinding.FragmentPokemonDisplayCardBinding
+import com.julio.pokedexwithpokeapiv2.fragments.HomeFragmentDirections
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.utils.Formatter
 import com.julio.pokedexwithpokeapiv2.utils.ImageDaoService
@@ -34,9 +37,11 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
 
           val nameTextView : TextView =  binding.textViewPokemonName
           val imagePokemon : ImageView = binding.imageViewPokemon
+          val btnDetails : Button = binding.btnDisplayPokemonDetails
+
 
           val viewToGlide = binding.root
-
+          val myView = binding.root
 
 
 
@@ -61,7 +66,20 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
         val imagemUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/$formattedId.png"
 
         holder.nameTextView.text = pokemon.name
-        Glide.with(holder.viewToGlide).load(imagemUrl).into(holder.imagePokemon)
+
+        Glide.with(holder.viewToGlide).load(imagemUrl).placeholder(R.drawable.pokemondefalultload2).into(holder.imagePokemon)
+
+
+        holder.btnDetails.setOnClickListener ( View.OnClickListener {
+            fun onClick (v : View){
+
+                val action = HomeFragmentDirections.actionHomeToDetailFragment(imagemUrl,
+                pokemon.name, formattedId)
+
+                v.findNavController().navigate(action)
+            }
+            onClick(holder.myView)
+        })
 
 
 
