@@ -15,7 +15,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.julio.pokedexwithpokeapiv2.R
+import com.julio.pokedexwithpokeapiv2.api.model.Pokemon
 import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
+import com.julio.pokedexwithpokeapiv2.api.model.PokemonsSpecies
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
 import com.julio.pokedexwithpokeapiv2.di.AppApplication
 import com.julio.pokedexwithpokeapiv2.fragments.PokemonDisplayCardFragment
@@ -36,6 +38,7 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
     var pokemonListResponse = MutableLiveData<PokemonListResult?>()
     var pokemonImageLiveData = MutableLiveData<Bitmap>()
     var pokemonLocalListFlow = mutableListOf<PokemonDaoEntity>()
+    var pokemonEvolutions = MutableLiveData<List<Pokemon>>()
 
 
     lateinit var  myQueryResponse : Flow<List<PokemonDaoEntity>>
@@ -63,28 +66,70 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
         }
     }
 
-    fun getPokemonEvolutions(){
+    fun getPokemonEvolutions(id : Int){
         viewModelScope.launch {
-            val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions()
+            val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions(id)
+            val formatterInstance = Formatter()
+
+
+            var firstEvolution : Pokemon? = null
+            var secondEvolution :Pokemon? = null
+            var pokemonEvolutionsList = mutableListOf<Pokemon>()
+
 
             if(pokemonEvolutionsChain.chain.evolves_to[0].species.name != null){
+                var firstEvolutionSpecie = pokemonEvolutionsChain.chain.evolves_to[0].species
+
+
+                val id = formatterInstance.getThePokemonIdFromSpeciesUrl(firstEvolutionSpecie.url)
+                val url = "https://pokeapi.co/api/v2/pokemon/$id/"
+
+
+                firstEvolution = Pokemon(firstEvolutionSpecie.name, url)
+
+
+
+
                 Log.e("EVOLUTION: ", pokemonEvolutionsChain.chain.evolves_to[0].species.name )
+
+                pokemonEvolutionsList.add(firstEvolution)
+
             }else{
                 Log.e("EVOLUTION: ", "NULL")
             }
 
-
             if(pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species.name != null){
+                var secondEvolutionSpecie = pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species
+
+
+                val id = formatterInstance.getThePokemonIdFromSpeciesUrl(secondEvolutionSpecie.url)
+                val url = "https://pokeapi.co/api/v2/pokemon/$id/"
+
+                secondEvolution =  Pokemon(secondEvolutionSpecie.name, url)
+
+
                 Log.e("EVOLUTION: ", pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species.name)
+                pokemonEvolutionsList.add(secondEvolution)
+
             }else{
                 Log.e("SECOND EVOLUTION: ", "NULL")
             }
+
+            pokemonEvolutions.value = pokemonEvolutionsList
+
+
+
+
 
 
 
         }
 
     }
+
+
+
+
 
 
     // Local Data-Base functions

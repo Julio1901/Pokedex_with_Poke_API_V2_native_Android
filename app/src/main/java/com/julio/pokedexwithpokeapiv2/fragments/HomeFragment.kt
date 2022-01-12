@@ -54,8 +54,9 @@ class HomeFragment : Fragment() {
             parametersOf(MainRepository(view.context))
         }
 
+
         //Testing get pokemon evolutions
-        mainViewModel.getPokemonEvolutions()
+        mainViewModel.getPokemonEvolutions(1)
 
 
         val recyclerViewHomePokemon = view.findViewById<RecyclerView>(R.id.recycler_view_home_pokemon)

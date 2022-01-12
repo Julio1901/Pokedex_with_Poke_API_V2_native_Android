@@ -29,4 +29,16 @@ class Formatter {
 
     }
 
+
+    fun getThePokemonIdFromSpeciesUrl(url : String) : String {
+
+        var pokemonId = url
+        pokemonId = pokemonId.dropWhile { it.digitToIntOrNull() == null}
+        val list = pokemonId.split("pokemon-species")
+        pokemonId = list[1].replace("/", "")
+
+        return pokemonId
+
+    }
+
 }

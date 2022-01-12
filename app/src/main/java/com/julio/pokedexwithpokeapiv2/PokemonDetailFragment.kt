@@ -8,9 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.julio.pokedexwithpokeapiv2.repository.MainRepository
+import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
+import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 class PokemonDetailFragment : Fragment() {
@@ -36,6 +43,11 @@ class PokemonDetailFragment : Fragment() {
         val textViewName : TextView = view.findViewById(R.id.pokemon_detail_name)
         val textViewId : TextView = view.findViewById(R.id.pokemon_detail_id)
         val buttonBackToHome : Button = view.findViewById(R.id.btn_back_to_home)
+        val recyclerViewEvolutions : RecyclerView = view.findViewById(R.id.recycler_view_evolutions)
+        val mainViewModel : MainViewModel by viewModel{
+            parametersOf(MainRepository(view.context))
+        }
+
 
         Glide.with(view).load(args.imageUrl).into(imageView)
         textViewName.text = args.name
@@ -45,6 +57,16 @@ class PokemonDetailFragment : Fragment() {
             val action = PokemonDetailFragmentDirections.actionFragmentDetailsToHome()
             view.findNavController().navigate(action)
         }
+
+
+
+        mainViewModel.getPokemonEvolutions(args.id.toInt())
+
+        mainViewModel.pokemonEvolutions.observe(this, Observer {
+
+            recyclerViewEvolutions.adapter = PokemonAdapter(view.context, mainViewModel.pokemonEvolutions.value!! )
+
+        })
 
     }
 

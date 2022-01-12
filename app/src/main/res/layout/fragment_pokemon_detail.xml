@@ -67,14 +67,27 @@
         android:id="@+id/btn_back_to_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/yellow_button"
         android:text="Back to home"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_attack"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_evolutions" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_evolutions"
+        android:layout_width="407dp"
+        android:layout_height="206dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="2dp"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_attack" />
 </androidx.constraintlayout.widget.ConstraintLayout>

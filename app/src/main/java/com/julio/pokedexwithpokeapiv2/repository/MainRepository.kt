@@ -27,8 +27,8 @@ class MainRepository (context : Context) {
       return RetrofitInstance.api.getPokemonById(id)
   }
 
- suspend fun getPokemonEvolutions() : ChainPersonalClass {
-     return RetrofitInstance.api.getPokemonEvolutions()
+ suspend fun getPokemonEvolutions(id : Int) : ChainPersonalClass {
+     return RetrofitInstance.api.getPokemonEvolutions(id)
  }
 
 

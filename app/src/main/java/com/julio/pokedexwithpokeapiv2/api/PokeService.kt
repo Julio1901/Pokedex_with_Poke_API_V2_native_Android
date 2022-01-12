@@ -29,8 +29,11 @@ interface PokeService {
         @Path("id")
         id : Int) : PokemonEntity
 
-    @GET("evolution-chain/1/")
-    suspend fun getPokemonEvolutions() : ChainPersonalClass
+    @GET("evolution-chain/{id}/")
+    suspend fun getPokemonEvolutions(
+        @Path("id")
+        id : Int
+    ) : ChainPersonalClass
 
 
 }
