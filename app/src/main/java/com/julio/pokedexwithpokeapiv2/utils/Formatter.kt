@@ -41,4 +41,15 @@ class Formatter {
 
     }
 
+    fun getEvolutionChainId(url : String) : Int{
+
+        var pokemonId = url
+        pokemonId = pokemonId.dropWhile { it.digitToIntOrNull() == null}
+        val list = pokemonId.split("evolution-chain")
+        pokemonId = list[1].replace("/", "")
+        return pokemonId.toInt()
+
+    }
+
+    //https://pokeapi.co/api/v2/evolution-chain/2/
 }

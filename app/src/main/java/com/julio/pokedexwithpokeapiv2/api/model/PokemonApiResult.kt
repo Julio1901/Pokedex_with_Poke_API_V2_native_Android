@@ -63,6 +63,15 @@ data class PokemonsSpecies(
 )
 
 
+data class PokemonEvolutionChain(
+    val evolution_chain : EvolutionUrl,
+    val evolves_from_species : PokemonsSpecies
+)
+
+data class EvolutionUrl(
+    val url : String
+)
+
 
 
 

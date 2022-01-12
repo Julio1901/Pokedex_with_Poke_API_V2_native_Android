@@ -3,6 +3,7 @@ package com.julio.pokedexwithpokeapiv2.repository
 import android.content.Context
 import com.julio.pokedexwithpokeapiv2.api.RetrofitInstance
 import com.julio.pokedexwithpokeapiv2.api.model.ChainPersonalClass
+import com.julio.pokedexwithpokeapiv2.api.model.PokemonEvolutionChain
 import com.julio.pokedexwithpokeapiv2.api.model.PokemonEvolutions
 import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
 import com.julio.pokedexwithpokeapiv2.dao.PokemonDaoEntity
@@ -31,6 +32,9 @@ class MainRepository (context : Context) {
      return RetrofitInstance.api.getPokemonEvolutions(id)
  }
 
+    suspend fun getPokemonEvolutionsChain(pokemonName : String) : PokemonEvolutionChain{
+        return RetrofitInstance.api.getPokemonEvolutionChain(pokemonName)
+    }
 
    // Local Data-Base requests
    suspend fun insertPokemonIntoDb(pokemon : PokemonDaoEntity){

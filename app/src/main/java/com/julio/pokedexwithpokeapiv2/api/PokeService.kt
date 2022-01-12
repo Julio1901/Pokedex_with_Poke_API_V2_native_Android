@@ -35,5 +35,10 @@ interface PokeService {
         id : Int
     ) : ChainPersonalClass
 
+    @GET("pokemon-species/{pokemonName}/")
+    suspend fun getPokemonEvolutionChain(
+        @Path("pokemonName") pokemonName : String
+    ) : PokemonEvolutionChain
+
 
 }

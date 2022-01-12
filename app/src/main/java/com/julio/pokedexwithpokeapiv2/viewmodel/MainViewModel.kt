@@ -68,8 +68,21 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
     fun getPokemonEvolutions(id : Int){
         viewModelScope.launch {
-            val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions(id)
+
+            val pokemon = mainRepository.getPokemonById(id)
+            val urlEvolutionChain = mainRepository.getPokemonEvolutionsChain(pokemon.name)
             val formatterInstance = Formatter()
+
+            Log.e("EVOLUTION CHAIN", urlEvolutionChain.evolution_chain.url)
+
+
+            val url = urlEvolutionChain.evolution_chain.url
+
+            val idEvolutionChain = formatterInstance.getEvolutionChainId(url)
+
+            // PASSAR O ID DO EVOLUTION CHAIN AO INVÉS DE ID
+            val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions(idEvolutionChain)
+
 
 
             var firstEvolution : Pokemon? = null
