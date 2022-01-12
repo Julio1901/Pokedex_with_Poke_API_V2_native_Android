@@ -2,8 +2,7 @@ package com.julio.pokedexwithpokeapiv2.api
 
 
 
-import com.julio.pokedexwithpokeapiv2.api.model.PokemonApiResult
-import com.julio.pokedexwithpokeapiv2.api.model.PokemonListResult
+import com.julio.pokedexwithpokeapiv2.api.model.*
 import com.julio.pokedexwithpokeapiv2.model.PokemonEntity
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -31,7 +30,7 @@ interface PokeService {
         id : Int) : PokemonEntity
 
     @GET("evolution-chain/1/")
-    suspend fun getPokemonEvolutions() : ResponseBody
+    suspend fun getPokemonEvolutions() : ChainPersonalClass
 
 
 }

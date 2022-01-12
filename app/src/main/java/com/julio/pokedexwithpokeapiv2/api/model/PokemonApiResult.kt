@@ -25,6 +25,39 @@ data class PokemonTypeSlot(
     val slot: Int,
     val type: PokemonType)
 
+data class PokemonEvolutions(
+    val id : Int,
+    val species : List<Pokemon>
+    )
+
+data class EvolutionsDetails(
+    val evolves_to : List<Pokemon>
+    )
+
+data class ChainPersonalClass(
+    val chain : ChainObject
+
+)
+
+
+data class ChainObject(
+    val evolves_to : List<EvolvesTo>
+
+)
+
+
+data class EvolvesTo(
+    val species : PokemonsSpecies
+
+)
+
+
+
+data class PokemonsSpecies(
+    val name : String,
+    val url : String
+)
+
 
 
 

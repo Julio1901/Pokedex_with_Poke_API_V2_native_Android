@@ -63,6 +63,21 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
         }
     }
 
+    fun getPokemonEvolutions(){
+        viewModelScope.launch {
+            val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions()
+
+            if(pokemonEvolutionsChain.chain.evolves_to[0].species.name != null){
+                Log.e("EVOLUTION: ", pokemonEvolutionsChain.chain.evolves_to[0].species.name )
+            }else{
+                Log.e("EVOLUTION: ", "NULL")
+            }
+
+
+        }
+
+    }
+
 
     // Local Data-Base functions
 
