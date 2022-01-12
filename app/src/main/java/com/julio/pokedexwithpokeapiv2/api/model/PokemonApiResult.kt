@@ -46,9 +46,13 @@ data class ChainObject(
 )
 
 
-data class EvolvesTo(
+data class EvolvesToSecond(
     val species : PokemonsSpecies
+)
 
+data class EvolvesTo(
+    val species : PokemonsSpecies,
+    val evolves_to : List<EvolvesToSecond>
 )
 
 

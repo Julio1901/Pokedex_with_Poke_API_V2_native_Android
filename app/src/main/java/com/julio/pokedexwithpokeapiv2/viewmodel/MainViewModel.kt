@@ -74,6 +74,14 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             }
 
 
+            if(pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species.name != null){
+                Log.e("EVOLUTION: ", pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species.name)
+            }else{
+                Log.e("SECOND EVOLUTION: ", "NULL")
+            }
+
+
+
         }
 
     }
