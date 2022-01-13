@@ -1,4 +1,4 @@
-package com.julio.pokedexwithpokeapiv2
+package com.julio.pokedexwithpokeapiv2.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,8 +13,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.julio.pokedexwithpokeapiv2.R
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
-import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
 import com.julio.pokedexwithpokeapiv2.ui.PokemonEvolutionsAdapter
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

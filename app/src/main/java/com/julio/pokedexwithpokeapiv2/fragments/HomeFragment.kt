@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
 
 
         //Testing get pokemon evolutions
-        mainViewModel.getPokemonEvolutions(1)
+        //mainViewModel.getPokemonEvolutions(1)
 
 
         val recyclerViewHomePokemon = view.findViewById<RecyclerView>(R.id.recycler_view_home_pokemon)
@@ -75,17 +75,17 @@ class HomeFragment : Fragment() {
 
 
 
-            val byteArray : ByteArray = byteArrayOf(1)
+           // val byteArray : ByteArray = byteArrayOf(1)
 
 
-            val mockPokemon = PokemonDaoEntity(
-                0,
-                "mock",
-                "mock",
-                2,
-                byteArray
-
-            )
+//            val mockPokemon = PokemonDaoEntity(
+//                0,
+//                "mock",
+//                "mock",
+//                2,
+//                byteArray
+//
+//            )
 
 
             val pokeTest = it!!.results[0]

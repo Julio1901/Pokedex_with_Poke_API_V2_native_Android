@@ -81,9 +81,11 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             var pokemonEvolutionsList = mutableListOf<Pokemon>()
 
 
-            
+            val firstPokemonResult =  pokemonEvolutionsChain.chain.evolves_to[0].species
+            val firstPokemonResultId = formatterInstance.getThePokemonIdFromSpeciesUrl(firstPokemonResult.url).toInt()
 
-            if(pokemonEvolutionsChain.chain.evolves_to[0].species.name != null){
+
+            if(firstPokemonResult.name != null && firstPokemonResultId > id){
                 var firstEvolutionSpecie = pokemonEvolutionsChain.chain.evolves_to[0].species
 
 
@@ -102,7 +104,11 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
                 Log.e("EVOLUTION: ", "NULL")
             }
 
-            if(pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species.name != null){
+
+            val secondPokemonResult = pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species
+            val secondPokemonResultId = formatterInstance.getThePokemonIdFromSpeciesUrl(secondPokemonResult.url).toInt()
+
+            if(secondPokemonResult.name != null && secondPokemonResultId > id){
                 var secondEvolutionSpecie = pokemonEvolutionsChain.chain.evolves_to[0].evolves_to[0].species
 
 
