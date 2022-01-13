@@ -74,22 +74,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_evolutions" />
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_evolutions"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_evolutions"
         android:layout_width="0dp"
         android:layout_height="206dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="2dp"
         android:orientation="horizontal"
         android:scrollbars="horizontal"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_pokemon_variations_title" />
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_maximum_evolution_message" />
 
     <TextView
         android:id="@+id/pokemon_detail_pokemon_variations_title"
@@ -104,4 +104,30 @@
         app:layout_constraintEnd_toEndOf="@+id/recycler_view_evolutions"
         app:layout_constraintStart_toStartOf="@+id/recycler_view_evolutions"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_attack" />
+
+    <TextView
+        android:id="@+id/pokemon_detail_maximum_evolution_message"
+        android:layout_width="244dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_detail_pokemon_variations_title"
+        tools:text="@string/maximum_evolution_message" />
+
+    <ImageView
+        android:id="@+id/pokemon_detail_image_pokemon_maximum_evolution"
+        android:layout_width="218dp"
+        android:layout_height="205dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/charmander"
+        app:layout_constraintBottom_toTopOf="@+id/btn_back_to_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pokemon_detail_maximum_evolution_message"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

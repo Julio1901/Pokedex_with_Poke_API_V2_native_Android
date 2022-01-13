@@ -41,7 +41,7 @@ class PokemonEvolutionsAdapter(private val context : Context, private val pokemo
 
         holder.nameCardView.text = pokemon.name
 
-        Glide.with(holder.viewToGlide).load(imagemUrl).placeholder(R.drawable.pokemondefalultload2).into(holder.pokemonImageCardView)
+        Glide.with(holder.viewToGlide).load(imagemUrl).placeholder(R.drawable.loadingimage).into(holder.pokemonImageCardView)
 
     }
 

@@ -38,17 +38,19 @@ class PokemonDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         val imageView : ImageView = view.findViewById(R.id.pokemon_detail_image)
         val textViewName : TextView = view.findViewById(R.id.pokemon_detail_name)
         val textViewId : TextView = view.findViewById(R.id.pokemon_detail_id)
         val buttonBackToHome : Button = view.findViewById(R.id.btn_back_to_home)
         val recyclerViewEvolutions : RecyclerView = view.findViewById(R.id.recycler_view_evolutions)
+        val textViewMaximumEvolution : TextView = view.findViewById(R.id.pokemon_detail_maximum_evolution_message)
+        val imageViewMaximumEvolution : ImageView = view.findViewById(R.id.pokemon_detail_image_pokemon_maximum_evolution)
         val mainViewModel : MainViewModel by viewModel{
             parametersOf(MainRepository(view.context))
         }
 
+        //Put transparency in imageview while there are pokemon evolutions to display
+        imageViewMaximumEvolution.setImageResource(android.R.color.transparent)
 
         Glide.with(view).load(args.imageUrl).into(imageView)
         textViewName.text = args.name
@@ -59,13 +61,18 @@ class PokemonDetailFragment : Fragment() {
             view.findNavController().navigate(action)
         }
 
-
-
         mainViewModel.getPokemonEvolutions(args.id.toInt())
 
         mainViewModel.pokemonEvolutions.observe(this, Observer {
 
             recyclerViewEvolutions.adapter = PokemonEvolutionsAdapter(view.context, mainViewModel.pokemonEvolutions.value!! )
+
+        })
+
+        mainViewModel.pokemonMaximumEvolution.observe(this, Observer {
+            textViewMaximumEvolution.text = resources.getText(R.string.maximum_evolution_message)
+            val pikachuGif = "https://c.tenor.com/3IACtMvxwdsAAAAC/pikachu-happy.gif"
+            Glide.with(view).load(pikachuGif).into(imageViewMaximumEvolution)
 
         })
 

@@ -67,7 +67,7 @@ class PokemonAdapter (private val context : Context, private val pokemonList : L
 
         holder.nameTextView.text = pokemon.name
 
-        Glide.with(holder.viewToGlide).load(imagemUrl).placeholder(R.drawable.pokemondefalultload2).into(holder.imagePokemon)
+        Glide.with(holder.viewToGlide).load(imagemUrl).placeholder(R.drawable.loadingimage).into(holder.imagePokemon)
 
 
         holder.btnDetails.setOnClickListener ( View.OnClickListener {

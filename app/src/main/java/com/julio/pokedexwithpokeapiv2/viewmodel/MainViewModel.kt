@@ -39,7 +39,7 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
     var pokemonImageLiveData = MutableLiveData<Bitmap>()
     var pokemonLocalListFlow = mutableListOf<PokemonDaoEntity>()
     var pokemonEvolutions = MutableLiveData<List<Pokemon>>()
-
+    var pokemonMaximumEvolution = MutableLiveData<Boolean>()
 
     lateinit var  myQueryResponse : Flow<List<PokemonDaoEntity>>
 
@@ -124,6 +124,13 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             }else{
                 Log.e("SECOND EVOLUTION: ", "NULL")
             }
+
+
+            if (firstEvolution == null && secondEvolution == null){
+                pokemonMaximumEvolution.value = true
+            }
+
+
 
             pokemonEvolutions.value = pokemonEvolutionsList
 

@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.lifecycle.Observer
 import com.julio.pokedexwithpokeapiv2.R
+import com.julio.pokedexwithpokeapiv2.repository.MainRepository
+import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 
 class EvolutionsPokemonDetailFragment : Fragment() {
