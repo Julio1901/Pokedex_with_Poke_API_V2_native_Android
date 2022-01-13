@@ -72,23 +72,16 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
             val pokemon = mainRepository.getPokemonById(id)
             val urlEvolutionChain = mainRepository.getPokemonEvolutionsChain(pokemon.name)
             val formatterInstance = Formatter()
-
             Log.e("EVOLUTION CHAIN", urlEvolutionChain.evolution_chain.url)
-
-
             val url = urlEvolutionChain.evolution_chain.url
-
             val idEvolutionChain = formatterInstance.getEvolutionChainId(url)
-
-            // PASSAR O ID DO EVOLUTION CHAIN AO INVÉS DE ID
             val pokemonEvolutionsChain = mainRepository.getPokemonEvolutions(idEvolutionChain)
-
-
-
             var firstEvolution : Pokemon? = null
             var secondEvolution :Pokemon? = null
             var pokemonEvolutionsList = mutableListOf<Pokemon>()
 
+
+            
 
             if(pokemonEvolutionsChain.chain.evolves_to[0].species.name != null){
                 var firstEvolutionSpecie = pokemonEvolutionsChain.chain.evolves_to[0].species
@@ -99,8 +92,6 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
 
                 firstEvolution = Pokemon(firstEvolutionSpecie.name, url)
-
-
 
 
                 Log.e("EVOLUTION: ", pokemonEvolutionsChain.chain.evolves_to[0].species.name )
@@ -130,19 +121,9 @@ class MainViewModel(private val mainRepository : MainRepository) : ViewModel() {
 
             pokemonEvolutions.value = pokemonEvolutionsList
 
-
-
-
-
-
-
         }
 
     }
-
-
-
-
 
 
     // Local Data-Base functions

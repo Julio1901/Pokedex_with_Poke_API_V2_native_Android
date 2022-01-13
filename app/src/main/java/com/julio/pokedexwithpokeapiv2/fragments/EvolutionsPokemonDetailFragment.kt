@@ -1,0 +1,24 @@
+package com.julio.pokedexwithpokeapiv2.fragments
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.julio.pokedexwithpokeapiv2.R
+
+
+class EvolutionsPokemonDetailFragment : Fragment() {
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_evolutions_pokemon_detail, container, false)
+    }
+
+
+
+}

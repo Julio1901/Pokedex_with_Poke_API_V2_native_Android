@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.ui.PokemonAdapter
+import com.julio.pokedexwithpokeapiv2.ui.PokemonEvolutionsAdapter
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -64,7 +65,7 @@ class PokemonDetailFragment : Fragment() {
 
         mainViewModel.pokemonEvolutions.observe(this, Observer {
 
-            recyclerViewEvolutions.adapter = PokemonAdapter(view.context, mainViewModel.pokemonEvolutions.value!! )
+            recyclerViewEvolutions.adapter = PokemonEvolutionsAdapter(view.context, mainViewModel.pokemonEvolutions.value!! )
 
         })
 

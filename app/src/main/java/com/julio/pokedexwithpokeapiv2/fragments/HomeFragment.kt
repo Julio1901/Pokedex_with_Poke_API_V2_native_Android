@@ -87,8 +87,6 @@ class HomeFragment : Fragment() {
 
             )
 
-            //mainViewModel.insertPokemonIntoDb(mockPokemon)
-
 
             val pokeTest = it!!.results[0]
 
@@ -109,9 +107,6 @@ class HomeFragment : Fragment() {
 
 
             recyclerViewHomePokemon.adapter = PokemonAdapter(view.context, it.results)
-
-
-
 
 
 

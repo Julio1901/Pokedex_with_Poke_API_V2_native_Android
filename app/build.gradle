@@ -83,5 +83,8 @@ dependencies {
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "io.mockk:mockk:1.12.2"
 
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+
 
 }
