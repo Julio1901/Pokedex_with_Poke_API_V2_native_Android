@@ -6,12 +6,12 @@
 - Exibição de lista de pokemons
 - Exibição de detalhes do pokemon
 - Persistência local de pokemons
-
+- Exibição da cadeia de evolução dos pokemons
 
 
 -Tela inicial com imagem default enquanto imagem do pokemon é carregada
 <br/>
-<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/01_aguardandoImagem.PNG'>
+<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/06_novo_imagem_carregando.png'>
 
 -Tela inicial com imagem do pokemon já carregada
 <br/>
@@ -19,7 +19,11 @@
 
 -Tela exibindo detalhes do pokemon
 <br/>
-<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/03_details.PNG'>
+<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/07_novo_details_screen.PNG'>
+
+-GIF Pikachu com mensagem quando o pokemon não possui mais estágios evolutivos
+<br/>
+<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/08_maximum_evolution_gif.PNG'>
 
 -Banco de dados local com pokemons 
 <br/>
@@ -32,7 +36,7 @@
 
 
 #### Features que estão sendo desenvolvidas
-- Exibição da cadeia de evolução dos pokemons
+
 - Exibição de maiores detalhes na tela de detalhes do pokemon
 - Exibição de pokemons por tipo
 - Persistência local das imagens do pokemon para que sejam exibidas mesmo offline para o usuário
