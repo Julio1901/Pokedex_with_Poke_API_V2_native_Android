@@ -20,7 +20,7 @@ class MainRepository (context : Context) {
 
     // Client API requests
     suspend fun getPokemonList() : PokemonListResult{
-        return RetrofitInstance.api.getPokemonList()
+        return RetrofitInstance.api.getPokemonList(151)
     }
 
 

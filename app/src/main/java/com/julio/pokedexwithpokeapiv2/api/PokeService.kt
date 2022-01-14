@@ -9,6 +9,7 @@ import retrofit2.Call
 
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface PokeService {
@@ -16,7 +17,7 @@ interface PokeService {
 
 
     @GET("pokemon/")
-    suspend fun getPokemonList() : PokemonListResult
+    suspend fun getPokemonList(@Query("limit") limit: Int) : PokemonListResult
 
 
     @GET("pokemon/{id}")
