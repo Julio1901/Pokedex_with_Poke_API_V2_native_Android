@@ -17,9 +17,9 @@
 <br/>
 <img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/01_imagem_carregada.PNG'>
 
--Tela exibindo detalhes do pokemon
+-Tela exibindo detalhes do pokemon com Progress Bar animado com efeito de preenchimento
 <br/>
-<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/07_novo_details_screen.PNG'>
+<img src='https://github.com/Julio1901/myProjectsImages/blob/master/PokemonApiV2/09_new_details_with_progress_bar.PNG'>
 
 -GIF Pikachu com mensagem quando o pokemon não possui mais estágios evolutivos
 <br/>
