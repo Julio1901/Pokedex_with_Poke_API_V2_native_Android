@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\usuario\.android\avd\NTTData_APP.avd" />
+            <value value="C:\Users\usuario\.android\avd\PokemonAPP.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-01-12T15:20:35.586937600Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-01-14T20:35:21.316799800Z" />
   </component>
 </project>

@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow_button">#FFEB3B</color>
+    <color name="orange_progress">#FB7500</color>
 </resources>

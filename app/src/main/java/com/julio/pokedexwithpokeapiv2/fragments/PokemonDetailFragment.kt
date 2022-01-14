@@ -1,19 +1,20 @@
 package com.julio.pokedexwithpokeapiv2.fragments
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.animation.DecelerateInterpolator
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.julio.pokedexwithpokeapiv2.R
+import com.julio.pokedexwithpokeapiv2.databinding.FragmentPokemonDetailBinding
 import com.julio.pokedexwithpokeapiv2.repository.MainRepository
 import com.julio.pokedexwithpokeapiv2.ui.PokemonEvolutionsAdapter
 import com.julio.pokedexwithpokeapiv2.viewmodel.MainViewModel
@@ -23,6 +24,9 @@ import org.koin.core.parameter.parametersOf
 
 class PokemonDetailFragment : Fragment() {
 
+    private var _binding : FragmentPokemonDetailBinding? = null
+    private val binding get() = _binding!!
+
 
     private val args : PokemonDetailFragmentArgs by navArgs()
 
@@ -30,24 +34,57 @@ class PokemonDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
+
+        _binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
+
+        val view = binding.root
+
+        return view
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageView : ImageView = view.findViewById(R.id.pokemon_detail_image)
-        val textViewName : TextView = view.findViewById(R.id.pokemon_detail_name)
-        val textViewId : TextView = view.findViewById(R.id.pokemon_detail_id)
-        val buttonBackToHome : Button = view.findViewById(R.id.btn_back_to_home)
-        val recyclerViewEvolutions : RecyclerView = view.findViewById(R.id.recycler_view_evolutions)
-        val textViewMaximumEvolution : TextView = view.findViewById(R.id.pokemon_detail_maximum_evolution_message)
-        val imageViewMaximumEvolution : ImageView = view.findViewById(R.id.pokemon_detail_image_pokemon_maximum_evolution)
+        val imageView : ImageView = binding.pokemonDetailImage
+        val textViewName : TextView = binding.pokemonDetailName
+        val textViewId : TextView = binding.pokemonDetailId
+        val buttonBackToHome : ImageButton = binding.btnBackToHome
+        val recyclerViewEvolutions : RecyclerView = binding.recyclerViewEvolutions
+        val textViewMaximumEvolution : TextView = binding.pokemonDetailMaximumEvolutionMessage
+        val imageViewMaximumEvolution : ImageView = binding.pokemonDetailImagePokemonMaximumEvolution
+
+        val hpProgressBar : ProgressBar = binding.hpProgressBarCircle
+        val hpPercentage : TextView = binding.hpPercentage
+
+        val attackProgressBar : ProgressBar = binding.attackProgressBarCircle
+        val attackPercentage : TextView = binding.attackPercentage
+
+        val defenseProgressBar : ProgressBar = binding.defenseProgressBarCircle
+        val defensePercentage : TextView = binding.defensePercentage
+
+        val speedProgressBar : ProgressBar = binding.speedProgressBarCircle
+        val speedPercentage : TextView = binding.speedPercentage
+
+        val specialAttackProgressBar : ProgressBar = binding.specialAttackProgressBarCircle
+        val specialAttackPercentage : TextView = binding.specialAttackPercentage
+
+        val specialDefenseProgressBar : ProgressBar = binding.specialDefenseProgressBarCircle
+        val specialDefensePercentage : TextView = binding.specialDefensePercentage
+
         val mainViewModel : MainViewModel by viewModel{
             parametersOf(MainRepository(view.context))
         }
+
+
+        //TODO: Replace these simulated numbers with real numbers coming from the API
+        updateProgressBar(hpProgressBar, hpPercentage, 70)
+        updateProgressBar(attackProgressBar, attackPercentage, 30)
+        updateProgressBar(defenseProgressBar,defensePercentage, 45)
+        updateProgressBar(speedProgressBar, speedPercentage, 80)
+        updateProgressBar(specialAttackProgressBar, specialAttackPercentage, 95)
+        updateProgressBar(specialDefenseProgressBar, specialDefensePercentage, 57)
+
 
         //Put transparency in imageview while there are pokemon evolutions to display
         imageViewMaximumEvolution.setImageResource(android.R.color.transparent)
@@ -76,6 +113,20 @@ class PokemonDetailFragment : Fragment() {
 
         })
 
+    }
+
+
+
+    fun updateProgressBar (progressBar : ProgressBar, textView: TextView, percentage: Int){
+
+        //Set animation in progress bar
+        val animation = ObjectAnimator.ofInt(progressBar, "progress", percentage)
+        animation.setDuration(1250)
+        animation.setInterpolator(DecelerateInterpolator())
+        animation.start()
+
+        //Update text view into progress bar
+        textView.text = "$percentage%"
     }
 
 }
